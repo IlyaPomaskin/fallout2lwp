@@ -189,7 +189,7 @@ static const int gLoadSaveFrmIds[LOAD_SAVE_FRM_COUNT] = {
 };
 
 // 0x5193B8
-static int _slot_cursor = 0;
+static int _slot_cursor = 1;
 
 // 0x5193BC
 static bool _quick_done = false;
@@ -506,7 +506,7 @@ int lsgSaveGame(int mode)
 
         unsigned int tick = getTicks();
         int keyCode = inputGetInput();
-        bool selectionChanged = false;
+        bool selectionChanged = true;
         int scrollDirection = LOAD_SAVE_SCROLL_DIRECTION_NONE;
 
         convertMouseWheelToArrowKey(&keyCode);
@@ -890,6 +890,18 @@ int lsgLoadGame(int mode)
     _ls_error_code = 0;
     _patches = settings.system.master_patches_path.c_str();
 
+lsgLoadGameInSlot(0);
+gameMouseSetCursor(MOUSE_CURSOR_ARROW);
+lsgWindowFree(mode == LOAD_SAVE_MODE_FROM_MAIN_MENU
+        ? LOAD_SAVE_WINDOW_TYPE_LOAD_GAME_FROM_MAIN_MENU
+        : LOAD_SAVE_WINDOW_TYPE_LOAD_GAME);
+
+interfaceBarHide();
+int mapId = randomBetween(0, wmGetMapsCount());
+mapLoadById(mapId);
+
+return 1;
+
     if (mode == LOAD_SAVE_MODE_QUICK && _quick_done) {
         int quickSaveWindowX = (screenGetWidth() - LS_WINDOW_WIDTH) / 2;
         int quickSaveWindowY = (screenGetHeight() - LS_WINDOW_HEIGHT) / 2;
@@ -1011,7 +1023,7 @@ int lsgLoadGame(int mode)
 
         unsigned int time = getTicks();
         int keyCode = inputGetInput();
-        bool selectionChanged = false;
+        bool selectionChanged = true;
         int scrollDirection = LOAD_SAVE_SCROLL_DIRECTION_NONE;
 
         convertMouseWheelToArrowKey(&keyCode);

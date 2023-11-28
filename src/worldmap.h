@@ -282,6 +282,7 @@ int wmMapMusicStart();
 int wmSetMapMusic(int mapIdx, const char* name);
 int wmMatchAreaContainingMapIdx(int mapIdx, int* areaIdxPtr);
 int wmTeleportToArea(int areaIdx);
+int wmGetMapsCount();
 
 void wmSetPartyWorldPos(int x, int y);
 void wmCarSetCurrentArea(int area);

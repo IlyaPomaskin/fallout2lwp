@@ -6545,6 +6545,10 @@ int wmMatchAreaContainingMapIdx(int mapIdx, int* areaIdxPtr)
     return -1;
 }
 
+int wmGetMapsCount() {
+    return wmMaxMapNum;
+}
+
 // 0x4C5A1C
 int wmTeleportToArea(int areaIdx)
 {

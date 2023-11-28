@@ -112,7 +112,7 @@ int falloutMain(int argc, char** argv)
             mainMenuWindowUnhide(1);
 
             mouseShowCursor();
-            int mainMenuRc = mainMenuWindowHandleEvents();
+            int mainMenuRc = MAIN_MENU_LOAD_GAME; // mainMenuWindowHandleEvents();
             mouseHideCursor();
 
             switch (mainMenuRc) {
