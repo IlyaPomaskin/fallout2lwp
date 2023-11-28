@@ -192,26 +192,6 @@ int Color2RGB(Color c)
 // 0x4C7320
 void colorPaletteFadeBetween(unsigned char* oldPalette, unsigned char* newPalette, int steps)
 {
-    for (int step = 0; step < steps; step++) {
-        sharedFpsLimiter.mark();
-
-        unsigned char palette[768];
-
-        for (int index = 0; index < 768; index++) {
-            palette[index] = oldPalette[index] - (oldPalette[index] - newPalette[index]) * step / steps;
-        }
-
-        if (gColorPaletteTransitionCallback != NULL) {
-            if (step % 128 == 0) {
-                gColorPaletteTransitionCallback();
-            }
-        }
-
-        _setSystemPalette(palette);
-        renderPresent();
-        sharedFpsLimiter.throttle();
-    }
-
     sharedFpsLimiter.mark();
     _setSystemPalette(newPalette);
     renderPresent();
