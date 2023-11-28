@@ -138,9 +138,9 @@ int debugPrint(const char* format, ...)
 
         rc = gDebugPrintProc(string);
     } else {
-#ifdef _DEBUG
+// #ifdef _DEBUG
         SDL_LogMessageV(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO, format, args);
-#endif
+// #endif
         rc = -1;
     }
 
