@@ -523,6 +523,10 @@ static int objectLoadAllInternal(File* stream)
                 return -1;
             }
 
+            if (isExitGridPid(objectListNode->obj->pid)) {
+                objectListNode->obj->flags |= OBJECT_HIDDEN;
+            }
+
             objectListNode->obj->outline = 0;
             gObjectFids[gObjectFidsLength++] = objectListNode->obj->fid;
 
